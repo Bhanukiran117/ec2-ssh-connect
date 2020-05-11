@@ -19,6 +19,16 @@ data "aws_security_group" "get_security_group_id" {
 
 }
 
+resource "aws_security_group_rule" "add_security_rule" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id  = data.aws_security_group.get_security_group_id.id
+}
+
+
 variable "amiid" {
 	type = string
 	default = "ami-00890f614e48ce866"
